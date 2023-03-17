@@ -1,0 +1,42 @@
+<template>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in data" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+  
+  <script>
+  import axios from 'axios'
+  
+  export default {
+    data() {
+      return {
+        data: []
+      }
+    },
+    created() {
+      axios.get('/api/data')
+        .then(response => {
+          this.data = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  }
+  </script>
+  
